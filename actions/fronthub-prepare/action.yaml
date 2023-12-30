@@ -1,0 +1,18 @@
+# action.yml
+name: Prepare Fronthub Inputs
+inputs:
+  manual-input-files:
+    description: Comma separated list of files to use beside Port data
+    required: true
+  output-dir:
+    description: Where to save the processed files?
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - fronthub-prepare
+  - --manual-input-files
+  - ${{ inputs.manual-input-files }}
+  - --output-dir
+  - ${{ inputs.output-dir }}
