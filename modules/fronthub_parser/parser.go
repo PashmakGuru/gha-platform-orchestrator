@@ -74,7 +74,7 @@ func Process(inputFiles []string) (string, error) {
 		}
 	}
 
-	processedOutput, err := json.Marshal(output)
+	processedOutput, err := json.MarshalIndent(output, "", "  ")
 	if err != nil {
 		return "", err
 	}
