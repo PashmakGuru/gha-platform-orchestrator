@@ -52,9 +52,6 @@ jobs:
       name: Run go fmt
       run: go fmt ./...
     -
-      name: Run terraform fmt
-      uses: dflook/terraform-fmt@v1
-    -
       name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
       with:

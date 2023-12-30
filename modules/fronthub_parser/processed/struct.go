@@ -5,7 +5,7 @@ type Fronthub struct {
 	OriginGroups    []string        `json:"origin_groups"`
 	PublicIPOrigins PublicIPOrigins `json:"public_ip_origins"`
 	Endpoints       []string        `json:"endpoints"`
-	RuleSets        []string        `json:"rule_sets"`
+	RuleSets      []string        `json:"rule_sets"`
 	Routes          Routes          `json:"routes"`
 }
 type PublicIpOrigin struct {
