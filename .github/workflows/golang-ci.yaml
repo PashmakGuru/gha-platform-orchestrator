@@ -27,3 +27,43 @@ jobs:
       -
         name: Test with the Go CLI
         run: go test ./...
+
+  format:
+    runs-on: ubuntu-22.04
+    name: Formate Golang
+    permissions:
+        contents: write
+        pull-requests: write
+    steps:
+    -
+      uses: actions/checkout@v4
+    -
+      name: Setup Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.20.x'
+    -
+      name: Install dependencies
+      run: go get .
+    -
+      name: Build
+      run: go build -v ./...
+    -
+      name: Run go fmt
+      run: go fmt ./...
+    -
+      name: Run terraform fmt
+      uses: dflook/terraform-fmt@v1
+    -
+      name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        commit-message: "🔨 Run `go fmt`"
+        title: 🔨 Reformat Golang Files
+        body: Update Golang files to canonical format using `go fmt ./...`
+        branch: refactor/go-fmt
+        # Delete PR branch if diff is resolved anyhow
+        delete-branch: true
+        labels: |
+            bot
+            kind/cleanup
