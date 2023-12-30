@@ -1,0 +1,62 @@
+{
+  "zones": [
+      "example.guru",
+      "example-2.guru"
+  ],
+  "origin_groups": [
+      "app-example-guru-cluster-alpha",
+      "app-more-example-2-guru-custom-path-cluster-beta"
+  ],
+  "public_ip_origins": {
+    "app-example-guru-cluster-alpha": {
+        "origin_group_name": "app-example-guru-cluster-alpha",
+        "pip_resource_group_name": "cluster-alpha-rg",
+        "pip_name_prefix": "kubernetes-",
+        "origin_host_header": "app.example.guru"
+    },
+    "app-more-example-2-guru-custom-path-cluster-beta": {
+      "origin_group_name": "app-more-example-2-guru-custom-path-cluster-beta",
+      "pip_resource_group_name": "cluster-beta-rg",
+      "pip_name_prefix": "kubernetes-",
+      "origin_host_header": "app.more.example-2.guru"
+    }
+  },
+  "endpoints": [
+    "app-example-guru-cluster-alpha",
+    "app-more-example-2-guru-custom-path-cluster-beta"
+  ],
+  "rule_sets": [
+    "appexampleguruclusteralpha",
+    "appmoreexample2gurucustompathclusterbeta"
+  ],
+  "routes": {
+    "app-example-guru-cluster-alpha": {
+        "endpoint_name": "app-example-guru-cluster-alpha",
+        "origin_group_name": "app-example-guru-cluster-alpha",
+        "origin_names": [
+            "app-example-guru-cluster-alpha"
+        ],
+        "rule_set_names": [
+            "appexampleguruclusteralpha"
+        ],
+        "patterns_to_match": [
+            "/*"
+        ],
+        "use_azure_domain": true
+    },
+    "app-more-example-2-guru-custom-path-cluster-beta": {
+      "endpoint_name": "app-more-example-2-guru-custom-path-cluster-beta",
+      "origin_group_name": "app-more-example-2-guru-custom-path-cluster-beta",
+      "origin_names": [
+          "app-more-example-2-guru-custom-path-cluster-beta"
+      ],
+      "rule_set_names": [
+          "appmoreexample2gurucustompathclusterbeta"
+      ],
+      "patterns_to_match": [
+          "/custom/path/*"
+      ],
+      "use_azure_domain": true
+    }
+  }
+}

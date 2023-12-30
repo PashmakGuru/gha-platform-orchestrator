@@ -1,0 +1,20 @@
+{
+    "zones": [
+      {
+        "domain": "example.guru",
+        "endpoints": [
+          {
+            "url": "app.example.guru/*",
+            "cluster": "cluster-alpha"
+          }
+        ]
+      }
+    ],
+    "clusters": [
+      {
+        "name": "cluster-alpha",
+        "resource_group": "cluster-alpha-rg",
+        "ip_name_prefix": "kubernetes-"
+      }
+    ]
+  }

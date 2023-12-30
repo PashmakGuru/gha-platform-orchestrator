@@ -1,0 +1,38 @@
+{
+  "zones": [
+      "example.guru"
+  ],
+  "origin_groups": [
+      "app-example-guru-cluster-alpha"
+  ],
+  "public_ip_origins": {
+    "app-example-guru-cluster-alpha": {
+        "origin_group_name": "app-example-guru-cluster-alpha",
+        "pip_resource_group_name": "cluster-alpha-rg",
+        "pip_name_prefix": "kubernetes-",
+        "origin_host_header": "app.example.guru"
+    }
+  },
+  "endpoints": [
+    "app-example-guru-cluster-alpha"
+  ],
+  "rule_sets": [
+    "appexampleguruclusteralpha"
+  ],
+  "routes": {
+    "app-example-guru-cluster-alpha": {
+        "endpoint_name": "app-example-guru-cluster-alpha",
+        "origin_group_name": "app-example-guru-cluster-alpha",
+        "origin_names": [
+            "app-example-guru-cluster-alpha"
+        ],
+        "rule_set_names": [
+            "appexampleguruclusteralpha"
+        ],
+        "patterns_to_match": [
+            "/*"
+        ],
+        "use_azure_domain": true
+    }
+  }
+}
