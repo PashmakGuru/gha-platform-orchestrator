@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub"
+	fronthub "github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub_parser"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub/friendly"
-	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub/processed"
+	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub_parser/friendly"
+	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub_parser/processed"
 	"github.com/gosimple/slug"
 )
 
