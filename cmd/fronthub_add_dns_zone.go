@@ -40,5 +40,4 @@ func init() {
 	RootCmd.AddCommand(FronthubAddDnsZoneCmd)
 	FronthubAddDnsZoneCmd.Flags().StringP("config-file", "", "", "Domain of the DNS zone")
 	FronthubAddDnsZoneCmd.Flags().StringP("domain", "", "", "Domain of the DNS zone")
-	FronthubAddDnsZoneCmd.Flags().BoolP("delete", "", false, "Should the given zone be deleted?")
 }

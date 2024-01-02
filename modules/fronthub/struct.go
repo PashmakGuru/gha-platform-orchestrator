@@ -72,3 +72,28 @@ func (f *Fronthub) DeleteDnsZone(domain string) error {
 
 	return nil
 }
+
+func (f *Fronthub) AddEndpoint(domain string, url string, cluster string) error {
+	altered := false
+
+	for key, zone := range f.Zones {
+		if zone.Domain == domain {
+			for _, endpoint := range zone.Endpoints {
+				if endpoint.URL == url {
+					return fmt.Errorf("the endpoint already exists for the domain")
+				}
+			}
+			f.Zones[key].Endpoints = append(f.Zones[key].Endpoints, Endpoints{
+				URL:     url,
+				Cluster: cluster,
+			})
+			altered = true
+		}
+	}
+
+	if !altered {
+		return fmt.Errorf("unable to found domain '%s' to add its endpoint", domain)
+	}
+
+	return nil
+}
