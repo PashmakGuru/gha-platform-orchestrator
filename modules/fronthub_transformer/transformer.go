@@ -1,4 +1,4 @@
-package fronthub
+package fronthub_transformer
 
 import (
 	"encoding/json"
@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub_parser/friendly"
-	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub_parser/processed"
+	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub_transformer/friendly"
+	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub_transformer/processed"
 	"github.com/gosimple/slug"
 )
 
@@ -20,7 +20,7 @@ type UrlParts struct {
 	Path       string
 }
 
-func Process(inputFiles []string) (string, error) {
+func Transform(inputFiles []string) (string, error) {
 	output := processed.Fronthub{
 		Routes:          map[string]processed.Route{},
 		PublicIPOrigins: map[string]processed.PublicIpOrigin{},
