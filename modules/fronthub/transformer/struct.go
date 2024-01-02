@@ -1,6 +1,11 @@
-package processed
+package transformer
 
-type Fronthub struct {
+import (
+	"encoding/json"
+	"os"
+)
+
+type FronthubModuleInput struct {
 	Zones           []string        `json:"zones"`
 	OriginGroups    []string        `json:"origin_groups"`
 	PublicIPOrigins PublicIPOrigins `json:"public_ip_origins"`
@@ -26,3 +31,19 @@ type Route struct {
 }
 
 type Routes map[string]Route
+
+func (f *FronthubModuleInput) Save(path string) error {
+	jsonData, err := json.MarshalIndent(f, "", "  ")
+	if err != nil {
+		return err
+	}
+
+	return os.WriteFile(path, []byte(jsonData), 0644)
+}
+
+func NewFronthubModuleInput() FronthubModuleInput {
+	return FronthubModuleInput{
+		Routes:          map[string]Route{},
+		PublicIPOrigins: map[string]PublicIpOrigin{},
+	}
+}

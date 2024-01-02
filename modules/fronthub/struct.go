@@ -1,4 +1,9 @@
-package friendly
+package fronthub
+
+import (
+	"encoding/json"
+	"os"
+)
 
 type Fronthub struct {
 	Zones    []Zones    `json:"zones"`
@@ -17,4 +22,13 @@ type Clusters struct {
 	Subscription  string `json:"subscription"`
 	ResourceGroup string `json:"resource_group"`
 	IPNamePrefix  string `json:"ip_name_prefix"`
+}
+
+func (f *Fronthub) Save(path string) error {
+	jsonData, err := json.MarshalIndent(f, "", "  ")
+	if err != nil {
+		return err
+	}
+
+	return os.WriteFile(path, []byte(jsonData), 0644)
 }
