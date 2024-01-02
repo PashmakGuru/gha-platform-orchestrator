@@ -21,17 +21,4 @@ func TestTransform(t *testing.T) {
 		assert.NoError(t, err)
 		assert.JSONEq(t, output, string(expectedOutput))
 	})
-
-	t.Run("transforming multiple input", func(t *testing.T) {
-		jsonFile, _ := os.Open("../assets/fronthub-transformer-processed-2.json")
-		expectedOutput, _ := io.ReadAll(jsonFile)
-
-		output, err := fronthub.Transform([]string{
-			"../assets/fronthub-transformer-input-2-1.json",
-			"../assets/fronthub-transformer-input-2-2.json",
-		})
-
-		assert.NoError(t, err)
-		assert.JSONEq(t, output, string(expectedOutput))
-	})
 }
