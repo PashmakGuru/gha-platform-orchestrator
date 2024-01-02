@@ -2,6 +2,7 @@ package fronthub
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 )
 
@@ -31,4 +32,19 @@ func (f *Fronthub) Save(path string) error {
 	}
 
 	return os.WriteFile(path, []byte(jsonData), 0644)
+}
+
+func (f *Fronthub) AddDnsZone(domain string) error {
+	for _, zone := range f.Zones {
+		if zone.Domain == domain {
+			return fmt.Errorf("domain already exists")
+		}
+	}
+
+	f.Zones = append(f.Zones, Zones{
+		Domain:    domain,
+		Endpoints: []Endpoints{},
+	})
+
+	return nil
 }
