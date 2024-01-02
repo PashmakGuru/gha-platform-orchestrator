@@ -25,6 +25,13 @@ type Clusters struct {
 	IPNamePrefix  string `json:"ip_name_prefix"`
 }
 
+func NewFronthub() *Fronthub {
+	return &Fronthub{
+		Zones:    []Zones{},
+		Clusters: []Clusters{},
+	}
+}
+
 func (f *Fronthub) Save(path string) error {
 	jsonData, err := json.MarshalIndent(f, "", "  ")
 	if err != nil {
@@ -45,6 +52,23 @@ func (f *Fronthub) AddDnsZone(domain string) error {
 		Domain:    domain,
 		Endpoints: []Endpoints{},
 	})
+
+	return nil
+}
+
+func (f *Fronthub) DeleteDnsZone(domain string) error {
+	found := false
+
+	for key, zone := range f.Zones {
+		if zone.Domain == domain {
+			f.Zones = append(f.Zones[:key], f.Zones[key+1:]...)
+			found = true
+		}
+	}
+
+	if !found {
+		return fmt.Errorf("the domain doesn't exist")
+	}
 
 	return nil
 }

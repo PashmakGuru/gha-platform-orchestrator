@@ -10,8 +10,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var FronthubAddDnsZoneCmd = &cobra.Command{
-	Use:   "fronthub:add-dns-zone",
+var FronthubDeleteDnsZoneCmd = &cobra.Command{
+	Use:   "fronthub:delete-dns-zone",
 	Short: "Modify the DNS zone",
 	Run: func(cmd *cobra.Command, args []string) {
 		configPath := mustGetStringFlag(cmd, "config-file")
@@ -22,9 +22,9 @@ var FronthubAddDnsZoneCmd = &cobra.Command{
 			log.Panicln("unable to read config", err)
 		}
 
-		err = config.AddDnsZone(domain)
+		err = config.DeleteDnsZone(domain)
 		if err != nil {
-			log.Panicln("unable to add dns zone", err)
+			log.Panicln("unable to delete dns zone", err)
 		}
 
 		err = config.Save(configPath)
@@ -37,8 +37,7 @@ var FronthubAddDnsZoneCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(FronthubAddDnsZoneCmd)
-	FronthubAddDnsZoneCmd.Flags().StringP("config-file", "", "", "Domain of the DNS zone")
-	FronthubAddDnsZoneCmd.Flags().StringP("domain", "", "", "Domain of the DNS zone")
-	FronthubAddDnsZoneCmd.Flags().BoolP("delete", "", false, "Should the given zone be deleted?")
+	RootCmd.AddCommand(FronthubDeleteDnsZoneCmd)
+	FronthubDeleteDnsZoneCmd.Flags().StringP("config-file", "", "", "Domain of the DNS zone")
+	FronthubDeleteDnsZoneCmd.Flags().StringP("domain", "", "", "Domain of the DNS zone")
 }
