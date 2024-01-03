@@ -97,3 +97,27 @@ func (f *Fronthub) AddEndpoint(domain string, url string, cluster string) error 
 
 	return nil
 }
+
+func (f *Fronthub) DeleteEndpoint(domain string, url string) error {
+	altered := false
+
+	for zKey, zone := range f.Zones {
+		if zone.Domain == domain {
+			for eKey, endpoint := range zone.Endpoints {
+				if endpoint.URL == url {
+					f.Zones[zKey].Endpoints = append(
+						f.Zones[zKey].Endpoints[:eKey],
+						f.Zones[zKey].Endpoints[eKey+1:]...,
+					)
+					altered = true
+				}
+			}
+		}
+	}
+
+	if !altered {
+		return fmt.Errorf("unable to found domain or endpoint to delete")
+	}
+
+	return nil
+}
