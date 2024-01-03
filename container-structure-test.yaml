@@ -1,7 +1,10 @@
 schemaVersion: 2.0.0
 commandTests:
 - name: Can Execute Help Command
+  command: "/home/app/app"
   args: ["help"]
   exitCode: 0
   expectedOutput:
   - ".*Platform Cloud Resources.*"
+metadataTest:
+  entrypoint: ["/home/app/app"]
