@@ -78,3 +78,20 @@ func (c *ClustersConfig) AddCluster(
 
 	return nil
 }
+
+func (c *ClustersConfig) DeleteCluster(name string) error {
+	found := false
+
+	for key, cluster := range c.Clusters {
+		if cluster.Name == name {
+			c.Clusters = append(c.Clusters[:key], c.Clusters[key+1:]...)
+			found = true
+		}
+	}
+
+	if !found {
+		return fmt.Errorf("the cluster doesn't exist")
+	}
+
+	return nil
+}
