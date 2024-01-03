@@ -14,8 +14,8 @@ inputs:
     description: Azure location of the cluster
     required: true
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: docker
+  image: "ghcr.io/pashmakguru/gha-platform-orchestrator:latest"
   args:
   - clusters:add
   - --config-file

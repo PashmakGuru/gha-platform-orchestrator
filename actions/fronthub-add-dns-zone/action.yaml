@@ -8,8 +8,8 @@ inputs:
     description: Name of the new domain
     required: true
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: docker
+  image: "ghcr.io/pashmakguru/gha-platform-orchestrator:latest"
   args:
   - fronthub:add-dns-zone
   - --config-file

@@ -8,8 +8,8 @@ inputs:
     description: Path to the transformed module-prepared output to store
     required: true
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: docker
+  image: "ghcr.io/pashmakguru/gha-platform-orchestrator:latest"
   args:
   - fronthub:transform
   - --input-file

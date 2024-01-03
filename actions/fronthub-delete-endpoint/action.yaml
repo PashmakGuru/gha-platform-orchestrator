@@ -11,8 +11,8 @@ inputs:
     description: "URL path of the endpoint, for example: *.example.com/path/*"
     required: true
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: docker
+  image: "ghcr.io/pashmakguru/gha-platform-orchestrator:latest"
   args:
   - fronthub:delete-endpoint
   - --config-file
