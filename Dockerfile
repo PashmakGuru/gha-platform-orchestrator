@@ -24,6 +24,4 @@ WORKDIR /home/app/
 COPY . /home/app/
 COPY --from=builder /go/bin/app /home/app/app
 
-USER app
-EXPOSE 8080
 ENTRYPOINT ["/home/app/app"]
