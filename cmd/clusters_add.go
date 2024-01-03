@@ -24,8 +24,7 @@ var ClustersAddCmd = &cobra.Command{
 		err = config.AddCluster(
 			mustGetStringFlag(cmd, "name"),
 			mustGetStringFlag(cmd, "environment"),
-			mustGetStringFlag(cmd, "resource-group-name"),
-			mustGetStringFlag(cmd, "resource-group-location"),
+			mustGetStringFlag(cmd, "location"),
 		)
 		if err != nil {
 			log.Panicln("unable to add cluster", err)
@@ -45,6 +44,5 @@ func init() {
 	ClustersAddCmd.Flags().StringP("config-file", "", "", "Clusters JSON configuration file")
 	ClustersAddCmd.Flags().StringP("name", "", "", "Name of the cluster")
 	ClustersAddCmd.Flags().StringP("environment", "", "", "Environment")
-	ClustersAddCmd.Flags().StringP("resource-group-name", "", "", "Resource group name on Azure")
-	ClustersAddCmd.Flags().StringP("resource-group-location", "", "", "Resource group location on Azure")
+	ClustersAddCmd.Flags().StringP("location", "", "", "Resource group location on Azure")
 }

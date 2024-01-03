@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io"
 	"os"
+
+	"github.com/gosimple/slug"
 )
 
 type ClustersConfig struct {
@@ -57,23 +59,20 @@ func (f *ClustersConfig) Save(path string) error {
 func (c *ClustersConfig) AddCluster(
 	name string,
 	environment string,
-	resourceGroupName string,
-	resourceGroupLocation string,
+	location string,
 ) error {
+	resourceGroupName := slug.Make(fmt.Sprintf("cluster-solution-%s-%s", name, environment))
+
 	for _, cluster := range c.Clusters {
 		if cluster.Name == name {
 			return fmt.Errorf("a cluster with name '%s' already exists", name)
-		}
-
-		if cluster.ResourceGroupName == resourceGroupName {
-			return fmt.Errorf("a cluster with resource group name '%s' already exists", resourceGroupName)
 		}
 	}
 
 	c.Clusters = append(c.Clusters, Cluster{
 		Name:                  name,
 		ResourceGroupName:     resourceGroupName,
-		ResourceGroupLocation: resourceGroupLocation,
+		ResourceGroupLocation: location,
 		Environment:           environment,
 	})
 
