@@ -1,0 +1,23 @@
+# action.yml
+name: "Fronthub: Delete Endpoint from JSON file"
+inputs:
+  config-file:
+    description: Path to the fronthub JSON config data file
+    required: true
+  domain:
+    description: Name of the domain
+    required: true
+  url:
+    description: "URL path of the endpoint, for example: *.example.com/path/*"
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - fronthub:delete-endpoint
+  - --config-file
+  - ${{ inputs.config-file }}
+  - --domain
+  - ${{ inputs.domain }}
+  - --url
+  - ${{ inputs.url }}

@@ -1,0 +1,28 @@
+# action.yml
+name: "Clusters: Add to JSON file"
+inputs:
+  config-file:
+    description: Path to the clusters JSON config data file
+    required: true
+  name:
+    description: Name of the new cluster
+    required: true
+  environment:
+    description: Environment of the cluster
+    required: true
+  location:
+    description: Azure location of the cluster
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - clusters:add
+  - --config-file
+  - ${{ inputs.config-file }}
+  - --name
+  - ${{ inputs.name }}
+  - --environment
+  - ${{ inputs.environment }}
+  - --location
+  - ${{ inputs.location }}

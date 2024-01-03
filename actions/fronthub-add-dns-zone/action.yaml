@@ -1,0 +1,19 @@
+# action.yml
+name: "Fronthub: Add DNS Zone to JSON file"
+inputs:
+  config-file:
+    description: Path to the fronthub JSON config data file
+    required: true
+  domain:
+    description: Name of the new domain
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - fronthub:add-dns-zone
+  - --config-file
+  - ${{ inputs.config-file }}
+  - --domain
+  - ${{ inputs.domain }}
+

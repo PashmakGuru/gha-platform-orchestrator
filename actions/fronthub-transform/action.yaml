@@ -1,0 +1,19 @@
+# action.yml
+name: "Fronthub: Transform config"
+inputs:
+  input-file:
+    description: Path to the fronthub JSON config data file
+    required: true
+  output-file:
+    description: Path to the transformed module-prepared output to store
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - fronthub:transform
+  - --input-file
+  - ${{ inputs.input-file }}
+  - --output-file
+  - ${{ inputs.output-file }}
+

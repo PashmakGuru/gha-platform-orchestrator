@@ -1,0 +1,29 @@
+# action.yml
+name: "Fronthub: Add Endpoint to JSON file"
+inputs:
+  config-file:
+    description: Path to the fronthub JSON config data file
+    required: true
+  domain:
+    description: Name of the domain
+    required: true
+  url:
+    description: "URL path of the endpoint, for example: *.example.com/path/*"
+    required: true
+  cluster:
+    description: Name of the cluster in IDP
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - fronthub:add-endpoint
+  - --config-file
+  - ${{ inputs.config-file }}
+  - --domain
+  - ${{ inputs.domain }}
+  - --url
+  - ${{ inputs.url }}
+  - --cluster
+  - ${{ inputs.cluster }}
+
