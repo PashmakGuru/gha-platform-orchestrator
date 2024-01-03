@@ -8,4 +8,4 @@ commandTests:
   - ".*Platform Cloud Resources.*"
 metadataTest:
   entrypoint: ["/home/app/app"]
-  user: "root"
+  user: ""
