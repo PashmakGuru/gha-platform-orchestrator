@@ -70,6 +70,9 @@ jobs:
     needs: [ test ]
     steps:
     -
+      name: Checkout
+      uses: actions/checkout@v3
+    -
       name: Set up QEMU
       uses: docker/setup-qemu-action@v3
     -
@@ -83,7 +86,7 @@ jobs:
         images: |
           ghcr.io/${{ github.repository	}}
         flavor: |
-          latest=auto
+          latest=true
         tags: |
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
