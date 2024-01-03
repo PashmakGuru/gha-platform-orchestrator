@@ -9,7 +9,7 @@ inputs:
     required: true
 runs:
   using: docker
-  image: "ghcr.io/pashmakguru/gha-platform-orchestrator:latest"
+  image: "docker://ghcr.io/pashmakguru/gha-platform-orchestrator:latest"
   args:
   - fronthub:transform
   - --input-file
