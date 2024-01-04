@@ -43,7 +43,11 @@ func (f *FronthubModuleInput) Save(path string) error {
 
 func NewFronthubModuleInput() FronthubModuleInput {
 	return FronthubModuleInput{
+		Zones:           []string{},
 		Routes:          map[string]Route{},
 		PublicIPOrigins: map[string]PublicIpOrigin{},
+		OriginGroups:    []string{},
+		Endpoints:       []string{},
+		RuleSets:        []string{},
 	}
 }
