@@ -8,7 +8,7 @@
   "public_ip_origins": {
     "app-example-guru-cluster-alpha": {
       "origin_group_name": "app-example-guru-cluster-alpha",
-      "pip_resource_group_name": "cluster-alpha-rg",
+      "pip_resource_group_name": "cluster-solution-cluster-alpha-testing",
       "pip_name_prefix": "kubernetes-",
       "origin_host_header": "app.example.guru"
     }

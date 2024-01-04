@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub"
+	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/portlabs"
 	"github.com/gosimple/slug"
 )
 
@@ -16,7 +17,7 @@ type UrlParts struct {
 	Path       string
 }
 
-func Transform(input fronthub.Fronthub) (*FronthubModuleInput, error) {
+func Transform(input fronthub.Fronthub, portClient *portlabs.PortClient) (*FronthubModuleInput, error) {
 	output := NewFronthubModuleInput()
 
 	for _, zone := range input.Zones {
@@ -40,20 +41,21 @@ func Transform(input fronthub.Fronthub) (*FronthubModuleInput, error) {
 				UseAzureDomain:  true,
 			}
 
-			var targetCluster fronthub.Clusters
-			for _, cluster := range input.Clusters {
-				if cluster.Name == friendlyEndpoint.Cluster {
-					targetCluster = cluster
-				}
+			targetCluster, err := portClient.GetCluster(friendlyEndpoint.Cluster)
+			if err != nil {
+				return nil, fmt.Errorf("failed to get the cluster %s from port: %v", friendlyEndpoint.Cluster, err)
 			}
 
-			if targetCluster.Name == "" {
-				return nil, fmt.Errorf("unable to find target cluster %s", friendlyEndpoint.Cluster)
-			}
+			// var targetCluster fronthub.Clusters
+			// for _, cluster := range input.Clusters {
+			// 	if cluster.Name == friendlyEndpoint.Cluster {
+			// 		targetCluster = cluster
+			// 	}
+			// }
 
 			output.PublicIPOrigins[id] = PublicIpOrigin{
 				OriginGroupName:      id,
-				PipResourceGroupName: targetCluster.ResourceGroup,
+				PipResourceGroupName: targetCluster.Properties.AzureResourceGroupName,
 				PipNamePrefix:        "kubernetes-",
 				OriginHostHeader:     urlParts.Hostname,
 			}

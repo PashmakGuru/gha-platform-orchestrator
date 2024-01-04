@@ -8,6 +8,7 @@ import (
 
 	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub"
 	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub/transformer"
+	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/portlabs"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +25,15 @@ var FronthubCmd = &cobra.Command{
 			log.Panicln("unable to read config", err)
 		}
 
-		outputConfig, err := transformer.Transform(*inputConfig)
+		portClient, err := portlabs.NewPortClient(
+			mustGetStringFlag(cmd, "port-client-id"),
+			mustGetStringFlag(cmd, "port-client-secret"),
+		)
+		if err != nil {
+			log.Panicln("unable to initiate port client", err)
+		}
+
+		outputConfig, err := transformer.Transform(*inputConfig, portClient)
 		if err != nil {
 			log.Panicln("unable to transform config", err)
 		}
@@ -51,4 +60,6 @@ func init() {
 	RootCmd.AddCommand(FronthubCmd)
 	FronthubCmd.Flags().StringP("input-file", "", "", "Comma separated list of manual input files")
 	FronthubCmd.Flags().StringP("output-file", "", "", "Output directory containing the Port-fetched input file and the processed one")
+	FronthubCmd.Flags().StringP("port-client-id", "", "", "Client ID of Port")
+	FronthubCmd.Flags().StringP("port-client-secret", "", "", "Client Secret of Port")
 }

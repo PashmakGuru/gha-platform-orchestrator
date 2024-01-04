@@ -9,12 +9,5 @@
           }
         ]
       }
-    ],
-    "clusters": [
-      {
-        "name": "cluster-alpha",
-        "resource_group": "cluster-alpha-rg",
-        "ip_name_prefix": "kubernetes-"
-      }
     ]
   }
