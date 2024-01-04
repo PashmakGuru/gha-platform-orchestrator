@@ -59,4 +59,5 @@ func Test_FronthubTransformerCommand(t *testing.T) {
 	assert.NoError(t, err)
 
 	assert.JSONEq(t, actual, expected)
+	assert.True(t, gock.IsDone(), "There are pending requests from gock!")
 }
