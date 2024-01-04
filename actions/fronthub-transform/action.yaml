@@ -7,6 +7,12 @@ inputs:
   output-file:
     description: Path to the transformed module-prepared output to store
     required: true
+  port-client-id:
+    description: Client ID to connect to Port
+    required: true
+  port-client-secret:
+    description: Client secret to connect to Port
+    required: true
 runs:
   using: docker
   image: "docker://ghcr.io/pashmakguru/gha-platform-orchestrator:latest"
@@ -16,4 +22,7 @@ runs:
   - ${{ inputs.input-file }}
   - --output-file
   - ${{ inputs.output-file }}
-
+  - --port-client-id
+  - ${{ inputs.port-client-id }}
+  - --port-client-secret
+  - ${{ inputs.port-client-secret }}
