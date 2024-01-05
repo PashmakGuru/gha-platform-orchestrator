@@ -4,6 +4,7 @@
         "domain": "example.guru",
         "endpoints": [
           {
+            "id": "app-example-guru-cluster-alpha",
             "url": "app.example.guru/*",
             "cluster": "cluster-alpha"
           }

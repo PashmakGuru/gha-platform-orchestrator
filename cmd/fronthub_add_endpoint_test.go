@@ -39,6 +39,7 @@ func Test_FronthubAddEndpointCommand(t *testing.T) {
 		for _, zone := range config.Zones {
 			if zone.Domain == "alpha.com" {
 				assert.Len(t, zone.Endpoints, 1)
+				assert.Equal(t, zone.Endpoints[0].Id, "alpha-com-my-path-cluster-alpha")
 				assert.Equal(t, zone.Endpoints[0].URL, "alpha.com/my-path/*")
 				assert.Equal(t, zone.Endpoints[0].Cluster, "cluster-alpha")
 			} else {
@@ -80,6 +81,7 @@ func Test_FronthubAddEndpointCommand(t *testing.T) {
 		for _, zone := range config.Zones {
 			if zone.Domain == "alpha.com" {
 				assert.Len(t, zone.Endpoints, 1)
+				assert.Equal(t, zone.Endpoints[0].Id, "alpha-com-my-path-cluster-alpha")
 				assert.Equal(t, zone.Endpoints[0].URL, "alpha.com/my-path/*")
 				assert.Equal(t, zone.Endpoints[0].Cluster, "cluster-alpha")
 			} else {

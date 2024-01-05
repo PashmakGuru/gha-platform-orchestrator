@@ -22,8 +22,7 @@ var FronthubDeleteEndpointCmd = &cobra.Command{
 		}
 
 		err = config.DeleteEndpoint(
-			mustGetStringFlag(cmd, "domain"),
-			mustGetStringFlag(cmd, "url"),
+			mustGetStringFlag(cmd, "id"),
 		)
 		if err != nil {
 			log.Panicln("unable to delete endpoint", err)
@@ -41,6 +40,5 @@ var FronthubDeleteEndpointCmd = &cobra.Command{
 func init() {
 	RootCmd.AddCommand(FronthubDeleteEndpointCmd)
 	FronthubDeleteEndpointCmd.Flags().StringP("config-file", "", "", "Domain of the DNS zone")
-	FronthubDeleteEndpointCmd.Flags().StringP("domain", "", "", "Domain of the DNS zone")
-	FronthubDeleteEndpointCmd.Flags().StringP("url", "", "", "Endpoint URL")
+	FronthubDeleteEndpointCmd.Flags().StringP("id", "", "", "Endpoint ID")
 }

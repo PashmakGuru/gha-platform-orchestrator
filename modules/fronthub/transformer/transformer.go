@@ -7,7 +7,6 @@ import (
 
 	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/fronthub"
 	"github.com/PashmakGuru/platform-cloud-resources/manager/modules/portlabs"
-	"github.com/gosimple/slug"
 )
 
 type UrlParts struct {
@@ -25,7 +24,7 @@ func Transform(input fronthub.Fronthub, portClient *portlabs.PortClient) (*Front
 		for _, friendlyEndpoint := range zone.Endpoints {
 			urlParts := parseUrl(friendlyEndpoint.URL)
 
-			id := slug.Make(fmt.Sprintf("%s-%s", friendlyEndpoint.URL, friendlyEndpoint.Cluster))
+			id := friendlyEndpoint.Id
 			idCompressed := strings.ReplaceAll(id, "-", "")
 
 			output.Endpoints = append(output.Endpoints, id)
